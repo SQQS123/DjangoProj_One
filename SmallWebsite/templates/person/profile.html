@@ -1,0 +1,17 @@
+{% extends 'personalbase.html' %}
+
+{% block personal_content %}
+    <div style="padding-left: 30px;padding-top: 30px;">
+        <div>个人资料</div>
+        <form action="{% url 'person:profile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="portrait">头像:</label><input type="file" id="portrait" name="portrait">
+            <br>
+            <label for="nickname">昵称:</label><input type="text" id="nickname" name="nickname">
+            <br>
+            <label for="mobile_num">手机号:</label><input type="text" id="mobile_num" name="mobile_num">
+            <br>
+            <input type="submit" value="更改">
+        </form>
+    </div>
+{% endblock %}

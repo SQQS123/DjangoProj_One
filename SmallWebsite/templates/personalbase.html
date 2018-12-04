@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load static %}
+    <!-- Left -->
+    <div style="width: 300px; height: 1100px; position: absolute;left:265px;top:15px;">
+        <!-- Top -->
+        <div style="width: 300px; height: 216px; background-color: #2c323E;">
+            <div style="background-color: red; width:72px;height:72px;position:absolute;top:19px;left:114px;border-radius: 100%"></div>
+            <span style="color: white;width: 84px; height: 20px;font-size: 20px;position:absolute; top: 102px;left:108px;">{{ user.mini_name }}</span>
+            <img src="{% static 'images/vip.png' %}" alt="" style="position:absolute;top:104px;right: 86px;">
+            <div style="width:300px;height:50px;position:absolute;top:146px;">
+                <div style="width:150px;height: 50px;text-align: center;color:white;float:left;">剩余积分
+                    <p>{{ user.scores }}</p>
+                </div>
+                <div style="width: 150px;height: 50px;text-align: center;float:right;border-left: 1px solid #FFFFFF;color:white;">剩余发布次数
+                    <p>{{ user.times }}</p>
+                </div>
+            </div>
+        </div>
+        <!-- Down -->
+        <div style="border-left:1px #EFEFEF solid;border-right:1px #EFEFEF solid;border-bottom:1px #EFEFEF solid;width:300px;height: 845px;position: absolute;top:216px;">
+            <div style=" height: 60px;line-height: 60px;padding-left: 22px;font-size: 18px;color: #2C323E">
+                <img src="{% static 'images/my_vip.png' %}" style="padding-right: 7px;"><a style="color:black;" href="{% url 'person:myVIP' %}">我的会员</a></div>
+            <div style=" height: 60px;line-height: 60px;padding-left: 22px;font-size: 18px;color: #2C323E">
+                <img src="{% static 'images/my_jf.png' %}" style="padding-right: 7px;"><a style="color:black;" href="{% url 'person:myJF' %}">我的积分</a></div>
+            <div style=" height: 60px;line-height: 60px;padding-left: 22px;font-size: 18px;color: #2C323E">
+                <img src="{% static 'images/post_n.png' %}" style="padding-right: 7px;"><a style="color:black;" href="{% url 'person:myFB' %}">我的发布</a></div>
+            <div style=" height: 60px;line-height: 60px;padding-left: 22px;font-size: 18px;color: #2C323E">
+                <img src="{% static 'images/xxx_n.png' %}" style="padding-right: 7px;"><a style="color:black;" href="{% url 'person:notify' %}">消息通知</a></div>
+
+            <div class="dropdown" style="height: 60px;">
+                <div data-toggle="dropdown" style="height: 60px;line-height:60px;padding-left: 22px;font-size: 18px;color: #2C323E" >
+                    <img src="{% static 'images/sz.png' %}" style="padding-right: 7px;">设置<i class="caret"></i></div>
+                <div class="dropdown-menu" style="border:none;box-shadow: none;margin-left: 35px;" id="settings_menu">
+                    <div><a href="{% url 'person:profile' %}"  style="color: black">个人资料</a> </div>
+                    <div><a href="{% url 'person:changepwd' %}" style="color: black">修改密码</a></div>
+                    <div><a href="{% url 'person:logout' %}" style="color: black">退出登录</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Right -->
+    <div style="width: 830px;height: 1060px;position:absolute;top: 15px;left:585px;border:1px solid #EFEFEF">
+        {% block personal_content %}
+        {% endblock %}
+    </div>
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+{% endblock %}

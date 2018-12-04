@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    {{ news.new_title }}
+    <br>
+    {{ news.new_auth }}
+    <br>
+    {{ news.abstract }}
+    <br>
+    {{ news.new_detail }}
+{% endblock %}

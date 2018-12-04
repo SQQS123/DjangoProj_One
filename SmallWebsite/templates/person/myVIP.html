@@ -1,0 +1,20 @@
+{% extends 'personalbase.html' %}
+
+{% block personal_content %}
+    <div style="padding-left: 30px;padding-top: 30px;">
+        <div>我的会员</div>
+        <div>当前<span>VIP</span> <span>{{ user.level }}</span>级,本月剩余文章发布次数:<span>{{ user.times }}</span>次
+            <a href="{% url 'person:charge' %}" style="background-color: #1992EF;">续费/升级</a>
+        </div>
+        <hr>
+        <div>会员等级说明</div>
+        <div style="height: 150px;" id="VIP_Info">
+            <div style="position: absolute">VIP1</div>
+            <div style="position: absolute">VIP2</div>
+            <div style="position: absolute">VIP3</div>
+        </div>
+        <hr>
+        <div>购买记录</div>
+        <!--这里实现分页 -->
+    </div>
+{% endblock %}

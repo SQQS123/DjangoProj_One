@@ -1,0 +1,13 @@
+{% extends 'personalbase.html' %}
+
+{% block personal_content %}
+<div style="padding-left: 30px;padding-top: 30px;">
+        <div>我的积分</div>
+        <div>当前剩余积分:<span>{{ user.scores }}</span><a href="{% url 'person:exchange' %}" style="background-color: #1992EF">兑换会员</a></div>
+        <hr>
+        <div>积分说明</div>
+        <div>这里是积分说明，可以从数据库里面取出来</div>
+        <hr>
+        <div>积分账单</div>
+</div>
+{% endblock %}

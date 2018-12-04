@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'mycss/mainpage.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #base_nav a{
+            text-decoration: none;
+            color: white;
+        }
+        #base a:hover, a:visited, a:link, a:active{
+            text-decoration: none;
+            color: white;
+        }
+        /*
+        li{
+            list-style: none;
+            float: left;
+            width: 80px;
+            height: 52px;
+            text-align: center;
+            line-height: 52px;
+        }
+        */
+        #main_nav li{
+            list-style: none;
+            float: left;
+            width: 80px;
+            height: 52px;
+            text-align: center;
+            line-height: 52px;
+        }
+    </style>
+</head>
+<body>
+        <div style="background-color: #2C323E;height: 70px;width: 100%">
+            <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" style="width:141px;height:31px;margin-top: 19px;margin-left: 271px;" ></a>
+
+            <!--未登录 -->
+                {% block user_status %}
+                    {% if  login_flag %}
+                        <div style="width: 78px;height: 28px;border: 1px solid white;border-radius: 28px;text-align: center;line-height: 28px;position: absolute;right: 535px;top:18px;"><a href="{% url 'message:fb' %}">发布内容</a></div>
+                        <div style="position: absolute;width: 34px;height: 34px;background-color: yellow;right: 480px;border-radius: 100%;top: 13px;">
+                            <a href="{% url 'person:myVIP' %}">test</a>
+                        </div>
+                    {% else %}
+                        <div style="position:absolute;left: 1340px;top:24px;">
+                            <a href="{% url 'user:login' %}">登录</a>
+                                        <span style="color: white;padding:5px;">|</span>
+                            <a href="{% url 'user:register' %}">注册</a>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+            <!--  下面的是登录成功后显示的页面:
+            <div style="width: 34px;height: 34px;margin-top: 17px;margin-right: 270px;background-color: red;float:right">发布内容</div>
+            <div style="width: 78px;height: 28px;;margin-top: 20px;margin-right: 28px;background-color:yellow;float: right"></div>
+            -->
+        </div>
+        <div style="position: relative">
+            {% block content %}
+            {% endblock %}
+        </div>
+</body>
+</html>

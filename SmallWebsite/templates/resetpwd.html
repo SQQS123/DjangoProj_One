@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <div style="border-left:4px solid black;border-top:1px solid #EFEFEF;border-right:1px solid #EFEFEF;border-bottom:1px solid #EFEFEF;width: 1152px;height: 52px;position: absolute;top:9px;left: 264px;">
+        <!-- 样式待调整 -->
+        <div style="float: left;line-height: 52px;margin-left: 28px;font-size: 16px;"><strong>修改密码</strong></div>
+        <div style="float: right;line-height: 52px;margin-right: 22px;font-size: 16px;"><strong>已有账号?<a href="{% url 'user:login' %}" style="color: #1992EF">立即登录</a></strong></div>
+    </div>
+    <div style="border:1px solid #EFEFEF;width: 1152px;height: 872px;position: absolute;top: 67px;left: 264px;">
+        <div style="width: 420px;height: 215px;position: absolute;left: 365px;top:120px;text-align: left    ">
+            <form action="{% url 'user:reset' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="username" value="{{ username }}">
+                <input type="password" name="ur_pwd" placeholder="请输入6位以上的密码" style="width: 418px;height: 40px;border-style: none;outline: none;">
+                <hr style="margin-top: 2px;">
+                <input type="password" name="ur_cfmpwd" placeholder="请再次输入密码" style="width: 418px;height: 40px;border-style: none;outline: none;">
+                <hr style="margin-top: 2px;">
+
+                <input type="submit" name="login_btn" value="修改" style="width: 420px;height: 50px;outline: none;background-color:#1992EF;border-radius: 4px;color:white;font-size: 16px;margin-top: 10px;border: none">
+            </form>
+
+            <!--  这儿是错误信息 -->
+            <div>{{ error }}</div>
+        </div>
+    </div>
+
+{% endblock %}

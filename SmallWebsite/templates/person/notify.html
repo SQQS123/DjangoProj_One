@@ -1,0 +1,11 @@
+{% extends 'personalbase.html' %}
+
+{% block personal_content %}
+    <div style="padding-left: 30px;padding-top: 30px;">
+        <div>消息通知</div>
+        <hr>
+        {% for notify in notifies %}
+            <div>{{ notify.comment }}</div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <!--轮播图-->
+    <div style="background-color: black;width: 520px;height: 300px;margin-top: 10px;margin-left: 265px;position: absolute;border-radius: 4px;">
+        <div id="box" class="carousel slide" data-ride="carousel">
+
+        </div>
+    </div>
+    <!-- 两张图-->
+    <div style="background-color: red;width: 246px;height: 142px;left:799px;top:10px;position: absolute;border-radius: 4px;"></div>
+    <div style="background-color: yellow;width: 246px;height: 142px;left:799px;top:168px;position: absolute;border-radius: 4px;"></div>
+
+    <!-- 导航栏  回头将这几个栏目用表读出来-->
+    <div style="border-left:4px solid black;border-top:1px solid #EFEFEF;border-right:1px solid #EFEFEF;border-bottom:1px solid #EFEFEF;width:782px;height: 52px;left:264px;top:320px;position: absolute">
+    <ul style="height: 52px" id="main_nav">
+        <li id="show_news">新闻</li>
+        <li id="show_policy">政策</li>
+        <li id="show_hq">行情</li>
+        <li id="show_tech">技术</li>
+    </ul>
+    </div>
+
+
+    <!-- 快讯和热门新闻  没有写完 -->
+    <div style="border-top:4px solid black;border-left:1px solid #EFEFEF;border-right:1px solid #EFEFEF;border-bottom:1px solid #EFEFEF;width: 332px;height: 722px;position: absolute;left: 1084px;top:9px;">
+    <div style="text-align: center;top: 18px;left:146.5px;position: absolute;font-size: 18px;color:#2C323E;"><strong>快讯</strong></div>
+    <div id="kx_list">
+        {% for kx in kxs %}
+            <a href="{{ kx.get_url_path }}"><div>{{ kx.new_title }}</div></a>
+        {% endfor %}
+    </div>
+    <div style="border:1px solid #1992EF;width: 108px;height: 32px;left:112px;bottom:21px;position: absolute;border-radius: 6px;line-height: 32px;text-align: center;color:#1992EF">查看更多资讯</div>
+    </div>
+
+    <div style="border-top:4px solid black;border-left:1px solid #EFEFEF;border-right:1px solid #EFEFEF;border-bottom:1px solid #EFEFEF;width: 332px;height: 696px;position: absolute;left: 1084px;top:759px;">
+    <div style="text-align: center;top: 18px;left:127px;position: absolute;font-size: 18px;color:#2C323E;">
+        <strong>热门新闻</strong>
+    </div>
+    </div>
+
+    <!-- 这里和上面的li使用jQuery搞出来效果 -->
+    <div id="article">
+        <!-- 新闻 -->
+        <div style="border:1px solid #EFEFEF;width: 782px;height:1239px;position: absolute;top:391px;left: 264px" id="news" class="article_content">
+            {% for new in news %}
+                <div style="border-bottom: 1px solid #EFEFEF;height: 177px;">
+                    <!-- 这里调整目录的显示效果，左边一张图片，右边是文章内容等 -->
+
+                    <a href="{{ new.get_url_path }}"><div style="padding: 19px;">{{ new.new_title }}</div></a>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- 政策 -->
+        <div style="border:1px solid #EFEFEF;width: 782px;height:1239px;position: absolute;top:391px;left: 264px" id="policy" class="article_content">
+            {% for policy in policies %}
+                <div style="border-bottom: 1px solid #EFEFEF;height: 177px;">
+                    <!-- 调整效果 -->
+                    <a href="{{ policy.get_url_path }}"><div style="padding: 19px;">{{ policy.new_title }}</div></a>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- 行情 -->
+        <div style="border:1px solid #EFEFEF;width: 782px;height:1239px;position: absolute;top:391px;left: 264px" id="hq" class="article_content">
+            {% for hq in hqs %}
+                <div style="border-bottom: 1px solid #EFEFEF;height: 177px;">
+                    <!-- 调整效果 -->
+                    <a href="{{ hq.get_url_path }}"><div style="padding: 19px;">{{ hq.new_title }}</div></a>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- 技术 -->
+        <div style="border:1px solid #EFEFEF;width: 782px;height:1239px;position: absolute;top:391px;left: 264px" id="tech" class="article_content">
+            {% for tech in techs %}
+                <div style="border-bottom: 1px solid #EFEFEF;height: 177px;">
+                    <a href="{{ tech.get_url_path }}"><div style="padding: 19px;">{{ tech.new_title }}</div></a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div style="border:1px solid #EFEFEF;width: 782px;height: 88px;position: absolute;top:1630px;left: 264px;text-align: center;color: #1992EF;">
+        <div style="border:1px solid #1992EF;width: 90px;height: 32px;left:346px;top:28px;position: absolute;border-radius: 6px;line-height: 32px;">加载更多</div>
+    </div>
+
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/dist/carousel.js' %}"></script>
+    <script type="text/javascript">
+var i = 2
+function loadmore(){
+    //得到当前url
+    var url = window.location.pathname,
+    url = url.substring(url.lastIndexOf('/') + 1, url.length);
+
+    if (url.includes("search")){}else{
+        var reg = new RegExp("");
+        url = url.replace(reg,"loadmore");
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function(){
+            if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                $('.list').append(xmlhttp.responseText);
+                var idclass  = $('.detail');
+                idclass.each(function(){
+                    var content = $(this).text();
+                    $(this).html(content);
+                });
+            }
+        }
+        xmlhttp.open("GET",url + "?page=" + i,true);
+        i = i + 1;
+        xmlhttp.send(null);
+    }
+}
+    </script>
+    <script>
+    $(document).scroll(function () {
+        if ($(document).scrollTop() >= $(document).height() - $(window).height()){
+            loadmore();
+        }
+    });
+    </script>
+    <script type="text/javascript">
+    //首先让新闻政策等内容清空
+$("#article .article_content div").css("display","none");
+
+//然后只显示新闻的内容
+$("#news div").css("display","block");
+$("#news").css("z-index",999)
+
+//鼠标点击
+$("#main_nav li").click(function(){
+	//隐藏全部
+	$("#article .article_content div").css("display","none");
+	//下面的内容可以封装成一个函数
+	//显示对应的内容
+	if ($(this).index()==0) {
+		$("#article .article_content div").css("display","none");
+		$("#article .article_content").css('z-index',0)
+		$("#news div").css("display","block");
+		$("#news").css("z-index",999);
+	}
+	if ($(this).index()==1) {
+		$("#article .article_content div").css("display","none");
+		$("#article .article_content").css('z-index',0)
+		$("#policy div").css("display","block");
+		$("#policy").css("z-index",999);
+	}
+	if ($(this).index()==2) {
+		$("#article .article_content div").css("display","none");
+		$("#article .article_content").css('z-index',0)
+		$("#hq div").css("display","block");
+		$("#hq").css("z-index",999);
+	}
+	if ($(this).index()==3) {
+		$("#article .article_content div").css("display","none");
+		$("#article .article_content").css('z-index',0)
+		$("#tech div").css("display","block");
+		$("#tech").css("z-index",999);
+	}
+});
+    </script>
+{% endblock %}

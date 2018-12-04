@@ -1,0 +1,20 @@
+{% extends 'personalbase.html' %}
+
+{% block personal_content %}
+        <div style="padding-left: 30px;padding-top: 30px;">
+        <div>修改密码</div>
+        <div style="width: 420px;height: 400px;position: absolute;left: 200px;top:100px;">
+            <form action="{% url 'person:resetpwd' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="username" value="{{ username }}">
+                <input type="password" name="ur_pwd" placeholder="请输入6位以上的密码" style="width: 418px;height: 40px;border-style: none;outline: none;">
+                <hr style="margin-top: 2px;">
+                <input type="password" name="ur_cfmpwd" placeholder="请再次输入密码" style="width: 418px;height: 40px;border-style: none;outline: none;">
+                <hr style="margin-top: 2px;">
+
+                <input type="submit" name="login_btn" value="修改" style="width: 420px;height: 50px;outline: none;background-color:#1992EF;border-radius: 4px;color:white;font-size: 16px;margin-top: 10px;border: none">
+            </form>
+            <div>{{ error }}</div>
+        </div>
+    </div>
+{% endblock %}

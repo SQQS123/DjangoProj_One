@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    {% load static %}
+
+        <div style="border-left:4px solid black;border-top:1px solid #EFEFEF;border-right:1px solid #EFEFEF;border-bottom:1px solid #EFEFEF;width: 1152px;height: 52px;position: absolute;top:9px;left: 264px;">
+        <!-- 样式待调整 -->
+        <div style="float: left;line-height: 52px;margin-left: 28px;font-size: 16px;"><strong>发布内容</strong></div>
+    </div>
+    <div style="border:1px solid #EFEFEF;width: 1152px;height: 872px;position: absolute;top: 67px;left: 264px;">
+        <form action="{% url 'message:fb' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="title">内容名称:</label><input type="text"  id="title" name="title">
+            <br>
+            <label for="">类型：</label>
+            <input type="radio" name="type" id="news" value="A" checked> <label for="news">新闻</label>
+            <input type="radio" name="type" id="policy" value="B"> <label for="policy">政策</label>
+            <input type="radio" name="type" id="quotation" value="C"> <label for="quotation">行情</label>
+            <input type="radio" name="type" id="tech" value="D"> <label for="tech">技术</label>
+            <input type="radio" name="type" id="kx" value="E"> <label for="kx">快讯</label>
+            <br>
+            <label for="author" >作者:</label><input type="text" id="author" name="author"> <label for="source">来源:</label><input type="text" id="source" name="source">
+            <br>
+            <label for="">内容封面:</label>
+            <input type="file" name="uploadFile" id="uploadFile"  >
+            <br>
+            <label for="detail">稿件内容:</label><textarea name="detail" id="detail"></textarea>
+            <input type="submit">
+        </form>
+    <div>{{ error }}</div>
+    </div>
+{% endblock %}

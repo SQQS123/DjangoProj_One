@@ -1,0 +1,21 @@
+{% extends 'personalbase.html' %}
+
+{% block personal_content %}
+<div style="padding-left: 30px;padding-top: 30px;">
+        <div>我的发布</div>
+        <div style="">
+        <ul style="height: 52px" id="main_nav">
+            <li>全部</li>
+            <li>待审核</li>
+            <li>审核通过</li>
+            <li>审核未通过</li>
+        </ul>
+        </div>
+<hr>
+    <div>
+        {% for message in messages %}
+            <div style="background-color: red;width: 782px;height: 177px;margin: 10px;">{{ message.new_title }}</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

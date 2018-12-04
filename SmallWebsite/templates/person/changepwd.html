@@ -1,0 +1,18 @@
+{% extends 'personalbase.html' %}
+
+{% block personal_content %}
+    <div style="padding-left: 30px;padding-top: 30px;">
+        <div>修改密码</div>
+        <div style="width: 420px;height: 400px;position: absolute;left: 200px;top:100px;">
+            <form action="{% url 'person:changepwd' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="u_mobile" placeholder="请输入手机号"  style="border-style: none;width: 418px;color:#888888;height: 40px;outline: none">
+                <hr style="margin-top: 2px;">
+                <input type="text" name="verify_code" placeholder="请输入验证码" style="border-style: none;width: 240px;color:#888888;height: 40px;outline: none;margin-top: -5px;">
+                <div  name="getverify_code_btn" style="float: right;width: 140px;height: 42px;background-color:#1992EF;color:white;font-size: 16px;border: none;text-align: center;line-height: 42px;">获取验证码</div>
+                <hr style="margin-top: 2px;width: 240px;">
+                <input type="submit" name="login_btn" id="next_step" value="下一步" style="width: 420px;height: 50px;outline: none;background-color:#1992EF;border-radius: 4px;color:white;font-size: 16px;margin-top: 10px;border: none">
+            </form>
+        </div>
+    </div>
+{% endblock %}
