@@ -4,6 +4,14 @@
     <div style="border-left:4px solid black;border-top:1px solid #EFEFEF;border-right:1px solid #EFEFEF;border-bottom:1px solid #EFEFEF;width: 1152px;height: 52px;position: absolute;top:9px;left: 264px;line-height: 52px;">支付</div>
     <div style="border:1px solid #EFEFEF;width: 1152px;height: 872px;position: absolute;top: 67px;left: 264px;">
     <!-- 在这里实现充值功能 -->
+        <form action="{% url 'person:charge' %}" method="post">
+            {% csrf_token %}
+            <input type="radio" checked name="chg_type" value=1 id="vip_one"><label for="vip_one">VIP1</label>
+            <input type="radio" name="chg_type" value=2 id="vip_two"><label for="vip_two">VIP2</label>
+            <input type="radio" name="chg_type" value=3 id="vip_three"><label for="vip_three">VIP3</label>
 
+            <input type="submit">
+        </form>
+        <div>{{ error }}</div>
     </div>
 {% endblock %}

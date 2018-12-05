@@ -12,10 +12,33 @@
         </ul>
         </div>
 <hr>
-    <div>
-        {% for message in messages %}
+    <div id="publish_content">
+{#        {% for message in messages %}#}
+        <!--
             <div style="background-color: red;width: 782px;height: 177px;margin: 10px;">{{ message.new_title }}</div>
+         -->
+{#        {% endfor %}#}
+        {% for contact in contacts %}
+            {# 每个"contact"都是一个Contact模型对象。 #}
+            {{ contact.new_title|upper }}<br />
         {% endfor %}
+        
+        {#  分页标签的HTML代码 #}
+        <div class="pagination">
+            <span class="step-links">
+                {% if contacts.has_previous %}
+                    <a href="?page={{ contacts.previous_page_number }}" style="color: black;">上一页</a>
+                {% endif %}
+
+                <span class="current">
+                    Page{{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+                </span>
+
+                {% if contacts.has_next %}
+                    <a href="?page={{ contacts.next_page_number }}" style="color: black;">下一页</a>
+                {% endif %}
+            </span>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -9,5 +9,30 @@
         <div>这里是积分说明，可以从数据库里面取出来</div>
         <hr>
         <div>积分账单</div>
+        <div>
+             {% for contact in contacts %}
+            {# 每个"contact"都是一个Contact模型对象。 #}
+                 <pre style="font-size: 20px;">
+{{ contact.detail }}        {{ contact.get_or_cost }}          {{ contact.exchange_time }}<br />
+                 </pre>
+        {% endfor %}
+
+        {#  分页标签的HTML代码 #}
+        <div class="pagination">
+            <span class="step-links">
+                {% if contacts.has_previous %}
+                    <a href="?page={{ contacts.previous_page_number }}" style="color: black;">上一页</a>
+                {% endif %}
+
+                <span class="current">
+                    Page{{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+                </span>
+
+                {% if contacts.has_next %}
+                    <a href="?page={{ contacts.next_page_number }}" style="color: black;">下一页</a>
+                {% endif %}
+            </span>
+        </div>
+        </div>
 </div>
 {% endblock %}

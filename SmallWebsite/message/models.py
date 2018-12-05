@@ -17,7 +17,7 @@ class new_messages(models.Model):
     new_detail = models.TextField(max_length=20000,null=False)
     new_img = models.ImageField(upload_to='images/cover')
     new_source = models.CharField(max_length=200)
-    new_pub = models.DateTimeField(auto_now=True)
+    new_pub = models.DateField(auto_now=True)
     new_auth = models.CharField(max_length=100)
     to_count = models.IntegerField(default=0)
     look_count = models.IntegerField(default=0)

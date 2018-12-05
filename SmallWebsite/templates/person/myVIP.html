@@ -15,6 +15,30 @@
         </div>
         <hr>
         <div>购买记录</div>
-        <!--这里实现分页 -->
+        <div>
+            {% for contact in contacts %}
+            {# 每个"contact"都是一个Contact模型对象。 #}
+                 <pre style="font-size: 20px;">
+{{ contact.code }}        {{ contact.charge_money }}          {{ contact.charge_time }}<br />
+                 </pre>
+        {% endfor %}
+
+        {#  分页标签的HTML代码 #}
+        <div class="pagination">
+            <span class="step-links">
+                {% if contacts.has_previous %}
+                    <a href="?page={{ contacts.previous_page_number }}" style="color: black;">上一页</a>
+                {% endif %}
+
+                <span class="current">
+                    Page{{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+                </span>
+
+                {% if contacts.has_next %}
+                    <a href="?page={{ contacts.next_page_number }}" style="color: black;">下一页</a>
+                {% endif %}
+            </span>
+        </div>
+        </div>
     </div>
 {% endblock %}

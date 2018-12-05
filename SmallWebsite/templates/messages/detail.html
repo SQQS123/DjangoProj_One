@@ -3,11 +3,13 @@
 {% load static %}
 
 {% block content %}
-    {{ news.new_title }}
+    <div style="text-align: center;font-size: 20px;">
+    标题:{{ news.new_title }}
     <br>
-    {{ news.new_auth }}
+    作者:{{ news.new_auth }}
     <br>
-    {{ news.abstract }}
+    摘要:{{ news.abstract }}
     <br>
-    {{ news.new_detail }}
+    详情:{{ news.new_detail }}
+    </div>
 {% endblock %}
